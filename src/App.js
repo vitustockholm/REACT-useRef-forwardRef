@@ -1,50 +1,20 @@
 import './App.css';
-import React, { useEffect, useRef } from 'react';
-import Input from './components/Input';
+import React, { useState, useRef } from 'react';
+import { useEffect } from 'react/cjs/react.development';
 
 function App() {
-  //
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const submitRef = useRef(null);
+  const [name, setName] = useState('');
+  const renderCount = useRef(1);
   //
   useEffect(() => {
-    firstNameRef.current.focus();
-  }, []);
-  //
-  const firstKeyDown = (e) => {
-    //synthetic event
-    if (e.key === 'Enter') {
-      lastNameRef.current.focus();
-    }
-  };
-  const lastKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      submitRef.current.focus();
-    }
-  };
-  const submitKeyDown = (e) => {
-    alert('Form submited!');
-  };
+    renderCount.current = renderCount.current + 1;
+  });
 
   return (
     <div className='App'>
-      <h5>If No mouse at client - user case frontend form inputs !</h5>
-      <Input
-        type='text'
-        onKeyDown={firstKeyDown}
-        ref={firstNameRef}
-        placeholder='Enter Name:'
-      />
-      <Input
-        type='text'
-        onKeyDown={lastKeyDown}
-        ref={lastNameRef}
-        placeholder='Enter Last Name:'
-      />
-      <button onKeyDown={submitKeyDown} ref={submitRef}>
-        Submit Form
-      </button>
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <div>Name {name}</div>
+      <div>Rendered {renderCount.current}</div>
     </div>
   );
 }
