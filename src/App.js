@@ -4,17 +4,23 @@ import { useEffect } from 'react/cjs/react.development';
 
 function App() {
   const [name, setName] = useState('');
-  const renderCount = useRef(1);
+  const prevName = useRef();
+
   //
   useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-  });
+    prevName.current = name;
+  }, [name]);
 
   return (
     <div className='App'>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <div>Name {name}</div>
-      <div>Rendered {renderCount.current}</div>
+      <input
+        ref={prevName}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <div>
+        Name {name} and used to be {prevName.current}
+      </div>
     </div>
   );
 }
