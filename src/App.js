@@ -30,13 +30,13 @@ function App() {
   return (
     <div className='App'>
       <h5>If No mouse at client - user case frontend form inputs !</h5>
-      <input
+      <Input
         type='text'
         onKeyDown={firstKeyDown}
         ref={firstNameRef}
         placeholder='Enter Name:'
       />
-      <input
+      <Input
         type='text'
         onKeyDown={lastKeyDown}
         ref={lastNameRef}
